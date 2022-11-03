@@ -1,4 +1,6 @@
 import { ShoppingCart } from 'phosphor-react'
+import { QuantityInput } from '../../../../components/QuantityInput'
+import { Card } from './styles'
 
 export interface CoffeeData {
   id: string
@@ -12,7 +14,7 @@ export interface CoffeeData {
 export function CardCoffee(coffee: CoffeeData) {
   console.log(`../../../../assets/Coffees/${coffee.imgUrl}.png`)
   return (
-    <div className="flex flex-col items-center justify-center bg-base-card rounded-3xl p-5">
+    <Card className="flex flex-col items-center justify-center bg-base-card p-5">
       <div className="w-32 mb-3">
         <img src={coffee.imgUrl} alt="" className="w-32 -mt-10" />
       </div>
@@ -30,33 +32,30 @@ export function CardCoffee(coffee: CoffeeData) {
         })}
       </ul>
 
-      <strong className="font-bold text-xl mb-2 text-base-subtitle">
+      <strong className="font-baloo font-bold text-xl mb-2 text-base-subtitle">
         {coffee.name}
       </strong>
       <p className="text-center text-sm text-base-label mb-8">
         {coffee.description}
       </p>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center justify-center gap-5">
         <strong className="font-extrabold text-2xl text-base-text">
-          <span className="inline-block before:content-['R$'] before:mr-1 before:text-base-text before:font-normal before:text-sm">
-            {coffee.price}
+          <span className="inline-block font-baloo before:content-['R$'] before:font-sans before:font-normal before:text-sm before:text-base-text before:mr-1">
+            {coffee.price / 100}0
           </span>
         </strong>
 
-        {/* <QuantityInput
-          onIncrease={handleIncrease}
-          onDecrease={handleDecrease}
-          quantity={quantity}
-        /> */}
-
-        <button
-          title="Checkout"
-          className="rounded-md p-2 bg-primary-dark text-base-card"
-        >
-          <ShoppingCart fontSize="1.375rem" weight="fill" />
-        </button>
+        <div className="flex items-center justify-center gap-2">
+          <QuantityInput />
+          <button
+            title="Checkout"
+            className="rounded-md p-2 bg-primary-dark text-base-card"
+          >
+            <ShoppingCart fontSize="1.375rem" weight="fill" />
+          </button>
+        </div>
       </div>
-    </div>
+    </Card>
   )
 }

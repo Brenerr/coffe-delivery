@@ -6,6 +6,12 @@ module.exports = {
       sans: ['Roboto', 'sans-serif'],
     },
     extend: {
+      fontFamily: {
+        baloo: ['"Baloo 2"', 'sans-serif'],
+      },
+      backgroundImage: {
+        home: "url('/src/assets/Background.svg')",
+      },
       colors: {
         base: {
           card: '#F3F2F2',

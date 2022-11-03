@@ -1,17 +1,17 @@
 import { CardCoffee, CoffeeData } from '../CardCoffee'
 import { COFFEES } from '../../../../data/coffee'
-import { LayoutContainer } from './styles'
+import { ListContainer } from './styles'
 
 export function ListCoffees() {
   const coffees: CoffeeData[] = COFFEES
 
   return (
-    <div className="flex flex-col gap-14 pt-8 pb-40">
-      <h2 className="text-3xl font-extrabold text-base-subtitle">
+    <div className="flex flex-col gap-14 pt-8 pb-40 w-full">
+      <h2 className="text-2xl font-baloo font-extrabold text-base-subtitle md:text-3xl">
         Nossos cafés
       </h2>
 
-      <LayoutContainer>
+      <ListContainer>
         {coffees.map((coffee) => {
           return (
             <CardCoffee
@@ -25,7 +25,7 @@ export function ListCoffees() {
             />
           )
         })}
-      </LayoutContainer>
+      </ListContainer>
     </div>
   )
 }
