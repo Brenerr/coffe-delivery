@@ -5,11 +5,3 @@ export const LayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
 `
-
-export const LayoutContent = styled.div`
-  display: flex;
-  max-width: 90rem;
-  width: 100%;
-  padding-right: 2.5rem;
-  padding-left: 2.5rem;
-`

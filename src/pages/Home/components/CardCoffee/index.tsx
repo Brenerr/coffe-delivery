@@ -1,20 +1,40 @@
 import { ShoppingCart } from 'phosphor-react'
+import { useContext, useState } from 'react'
 import { QuantityInput } from '../../../../components/QuantityInput'
-import { Card } from './styles'
+import {
+  CoffeeProps,
+  CoffeesContext,
+} from '../../../../contexts/CoffeesContext'
 
-export interface CoffeeData {
-  id: string
-  name: string
-  description: string
-  categories: string[]
-  price: number
-  imgUrl: string
-}
+export function CardCoffee(coffee: CoffeeProps) {
+  const { addCoffeeToCart } = useContext(CoffeesContext)
 
-export function CardCoffee(coffee: CoffeeData) {
-  console.log(`../../../../assets/Coffees/${coffee.imgUrl}.png`)
+  const [quantity, setQuantity] = useState(1)
+
+  function handleAddToCart() {
+    const coffeeToAdd = {
+      id: coffee.id,
+      quantity,
+    }
+
+    addCoffeeToCart(coffeeToAdd)
+    setQuantity(1)
+  }
+
+  function handleIncrease() {
+    setQuantity((state: any) => state + 1)
+  }
+
+  function handleDecrease() {
+    setQuantity((state: any) => state - 1)
+  }
+
+  function formattedPrice(price: number): string {
+    return String((price / 100).toFixed(2)).replace('.', ',')
+  }
+
   return (
-    <Card className="flex flex-col items-center justify-center bg-base-card p-5">
+    <span className="flex flex-col items-center justify-center bg-base-card p-5 rounded-md rounded-tr-[2.25rem] rounded-bl-[2.25rem]">
       <div className="w-32 mb-3">
         <img src={coffee.imgUrl} alt="" className="w-32 -mt-10" />
       </div>
@@ -42,20 +62,25 @@ export function CardCoffee(coffee: CoffeeData) {
       <div className="flex items-center justify-center gap-5">
         <strong className="font-extrabold text-2xl text-base-text">
           <span className="inline-block font-baloo before:content-['R$'] before:font-sans before:font-normal before:text-sm before:text-base-text before:mr-1">
-            {coffee.price / 100}0
+            {formattedPrice(coffee.price)}
           </span>
         </strong>
 
         <div className="flex items-center justify-center gap-2">
-          <QuantityInput />
+          <QuantityInput
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            quantity={quantity}
+          />
           <button
-            title="Checkout"
-            className="rounded-md p-2 bg-primary-dark text-base-card"
+            title="Adicionar ao carrinho"
+            className="rounded-md p-2 bg-primary-dark hover:bg-primary transition text-base-card"
+            onClick={handleAddToCart}
           >
             <ShoppingCart fontSize="1.375rem" weight="fill" />
           </button>
         </div>
       </div>
-    </Card>
+    </span>
   )
 }

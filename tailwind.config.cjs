@@ -2,6 +2,10 @@
 module.exports = {
   content: ['./src/**/*.tsx', './index.html'],
   theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+    },
     fontFamily: {
       sans: ['Roboto', 'sans-serif'],
     },
