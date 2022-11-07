@@ -13,4 +13,18 @@ export const Input = styled.input`
     box-shadow: 0 0 0 1px ${(props) => props.theme.secondary.dark};
     border-color: ${(props) => props.theme.secondary.dark};
   }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
 `

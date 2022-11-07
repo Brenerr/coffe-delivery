@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import {
   CoffeeProps,
   CoffeesContext,
@@ -7,6 +8,7 @@ import { CartCoffee } from './CartCoffee'
 
 export function Cart() {
   const { coffees, cartItems } = useContext(CoffeesContext)
+  const { watch } = useFormContext()
 
   const [cartList, setCartList] = useState<CoffeeProps[]>([])
   const [totalItemsPrice, setTotalItemsPrice] = useState<number>(0)
@@ -16,6 +18,8 @@ export function Cart() {
   function formattedPrice(price: number): string {
     return String((price / 100).toFixed(2)).replace('.', ',')
   }
+
+  const street = watch('street')
 
   useEffect(() => {
     const updatedCartList: CoffeeProps[] = cartItems.map((item) => {
@@ -60,9 +64,11 @@ export function Cart() {
           </strong>
         </div>
 
-        <button className="font-bold text-sm text-white uppercase px-2 py-3 rounded-md bg-secondary hover:bg-secondary-dark transition w-full">
-          Confirmar pedido
-        </button>
+        <input
+          type="submit"
+          className="font-bold text-sm text-white uppercase px-2 py-3 rounded-md bg-secondary hover:bg-secondary-dark transition w-full"
+          value={'Confirmar pedido'}
+        />
       </div>
     </div>
   )

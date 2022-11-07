@@ -1,8 +1,25 @@
 import Delivery from '../../../../assets/delivery.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { OrderInfos } from './styles'
+import { useFormContext } from 'react-hook-form'
+import { PaymentTypes } from '../..'
+
+interface NewFormData {
+  number: string
+  street: string
+  district: string
+  city: string
+  state: string
+  payment: 'CREDIT' | 'DEBIT' | 'MONEY'
+  cep: string
+  complement: string
+}
 
 export function Success() {
+  const { getValues } = useFormContext<NewFormData>()
+
+  const form = getValues()
+
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-1 w-full text-center md:text-left">
@@ -24,9 +41,13 @@ export function Success() {
             </span>
             <span className="text-base-text">
               <p>
-                Entrega em <b>Rua João Daniel Martinelli, 102</b>
+                Entrega em
+                <b>{` ${form.street}, ${form.number}`}</b>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>
+                {`${form.district} - ${form.city}, `}
+                <span className="uppercase">{form.state}</span>
+              </p>
             </span>
           </div>
 
@@ -46,7 +67,7 @@ export function Success() {
             </span>
             <span className="text-base-text">
               <p>Pagamento na entrega</p>
-              <b>Cartão de Crédito</b>
+              <b>{PaymentTypes[form.payment]}</b>
             </span>
           </div>
         </OrderInfos>

@@ -1,6 +1,10 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
+import { useFormContext } from 'react-hook-form'
+import { Option } from './styles'
 
 export function Payment() {
+  const { register } = useFormContext()
+
   return (
     <div className="flex flex-col bg-base-card gap-8 p-10 rounded-md">
       <div className="flex gap-2">
@@ -13,20 +17,58 @@ export function Payment() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-3">
-        <button className="col-span-full md:col-span-1 flex items-center justify-center gap-3 bg-base-button hover:bg-base-hover transition rounded-md p-4 uppercase text-xs text-base-text">
-          <CreditCard fontSize="1rem" className="text-primary" />
-          Cartão de crédito
-        </button>
-        <button className="col-span-full md:col-span-1 flex items-center justify-center gap-3 bg-base-button hover:bg-base-hover transition rounded-md p-4 uppercase text-xs text-base-text">
-          <Bank fontSize="1rem" className="text-primary" />
-          Cartão de débito
-        </button>
-        <button className="col-span-full md:col-span-1 flex items-center justify-center gap-3 bg-base-button hover:bg-base-hover transition rounded-md p-4 uppercase text-xs text-base-text">
-          <Money fontSize="1rem" className="text-primary" />
-          Dinheiro
-        </button>
-      </div>
+      <section className="grid grid-cols-3 gap-3">
+        <Option>
+          <input
+            id="credit"
+            className="peer/credit"
+            type="radio"
+            value="CREDIT"
+            {...register('payment')}
+          />
+          <label
+            htmlFor="credit"
+            className="peer-checked/credit:bg-primary-light peer-checked/credit:border-primary transition"
+          >
+            <CreditCard fontSize="1rem" className="text-primary" />
+            Cartão de crédito
+          </label>
+        </Option>
+
+        <Option>
+          <input
+            id="debit"
+            className="peer/debit"
+            type="radio"
+            value="DEBIT"
+            {...register('payment')}
+          />
+          <label
+            htmlFor="debit"
+            className="peer-checked/debit:bg-primary-light peer-checked/debit:border-primary transition"
+          >
+            <Bank fontSize="1rem" className="text-primary" />
+            Cartão de débito
+          </label>
+        </Option>
+
+        <Option>
+          <input
+            id="money"
+            className="peer/money"
+            type="radio"
+            value="MONEY"
+            {...register('payment')}
+          />
+          <label
+            htmlFor="money"
+            className="peer-checked/money:bg-primary-light peer-checked/money:border-primary transition"
+          >
+            <Money fontSize="1rem" className="text-primary" />
+            Dinheiro
+          </label>
+        </Option>
+      </section>
     </div>
   )
 }
